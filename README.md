@@ -8,7 +8,8 @@ you don't need the full sync / collection methods Backbone Models provide.
 ```javascript
 var view = new Backbone.View;
 _.extend(view, Backbone.Attributes);
-view.on('change:page_title', function(title) {
+
+view.on('change:title', function(title) {
   this.$('.title').text(title);
 });
 
