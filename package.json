@@ -1,0 +1,27 @@
+{
+  "name": "backbone.attributes",
+  "version": "0.1.0",
+  "author": "Adam Krebs <amk528@cs.nyu.edu>",
+  "description": "Give any object Backbone getters and setters",
+  "licence": "MIT",
+  "main": "backbone.attributes",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/akre54/backbone.attributes"
+  },
+  "dependencies": {
+    "underscore": "*"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "chai": "*",
+    "backbone": "git://github.com/documentcloud/backbone"
+  },
+  "engines": {
+    "node": "*",
+    "npm": "*"
+  },
+  "scripts": {
+    "test": "node_modules/.bin/mocha"
+  }
+}
