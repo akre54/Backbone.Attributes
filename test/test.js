@@ -15,6 +15,22 @@ describe('Backbone.Attributes', function() {
     obj.setAttribute('name', 'foo');
   });
 
+  it('should work with defaults', function() {
+    var obj = {
+      defaults: {
+        name: 'Moe'
+      }
+    };
+    obj = _.extend(obj, Backbone.Attributes);
+
+    obj.getAttribute('name').should.equal('Moe');
+    obj.on('change:name', function(ctx, name) {
+      name.should.equal('Larry');
+      this.getAttribute('name').should.equal(name);
+    });
+    obj.setAttribute('name', 'Larry');
+  });
+
   it('should not collide with Backbone.Collection methods', function() {
     var col = _.extend(new Backbone.Collection, Backbone.Attributes);
 

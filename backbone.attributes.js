@@ -7,7 +7,7 @@
     var fn = Backbone.Model.prototype[method];
     method = method === 'get' || method === 'set' ? method + 'Attribute' : method;
     Backbone.Attributes[method] = _.contains(wrappedMethods, method) ?
-       function() { this.attributes || (this.attributes = {}); return fn.apply(this, arguments) } : fn;
+       function() { this.attributes || (this.attributes = _.defaults({}, _.result(this, 'defaults'))); return fn.apply(this, arguments) } : fn;
   });
 
   Backbone.Attributes._validate = function() { return true; }; // hacky, but works
