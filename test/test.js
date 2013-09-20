@@ -34,6 +34,7 @@ describe('Backbone.Attributes', function() {
   it('should not collide with Backbone.Collection methods', function() {
     var col = _.extend(new Backbone.Collection, Backbone.Attributes);
 
+    col.get.should.equal(Backbone.Collection.prototype.get);
     col.on('change:name', function(ctx, name) {
       ctx.should.equal(col);
       this.should.equal(col);
