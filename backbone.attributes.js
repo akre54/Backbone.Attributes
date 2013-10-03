@@ -1,4 +1,12 @@
-(function() {
+(function (factory) {
+  if (typeof define === 'function' && define.amd) {
+      define(['backbone'], factory);
+  } else if (typeof exports === 'object') {
+      factory(require('backbone'));
+  } else {
+      factory(Backbone);
+  }
+}(function (Backbone) {
   Backbone.Attributes = _.extend({}, Backbone.Events);
   var modelMethods = ['get', 'set', 'unset', 'clear', 'has', 'changed', 'hasChanged', 'changedAttributes', 'previous', 'previousAttributes'];
   var wrappedMethods = ['getAttribute', 'setAttribute', 'clear', 'changedAttributes'];
@@ -11,4 +19,4 @@
   });
 
   Backbone.Attributes._validate = function() { return true; }; // hacky, but works
-}).call(this);
+}));
