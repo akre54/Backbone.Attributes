@@ -1,3 +1,11 @@
+// Backbone.Attributes.js 0.2.1
+// ---------------
+
+//     (c) 2013 Adam Krebs
+//     Backbone.Attributes may be freely distributed under the MIT license.
+//     For all details and documentation:
+//     https://github.com/akre54/Backbone.Attributes
+
 (function (factory) {
   if (typeof define === 'function' && define.amd) {
       define(['underscore', 'backbone'], factory);
