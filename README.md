@@ -20,5 +20,7 @@ These methods are borrowed from Backbone.Model, so their functionality is
 exactly the same. You can pass a hash of properties, listen on multiple
 change events, or trigger complex change sequences.
 
-Model#get and Model#set have been renamed to getAttribute and setAttribute
-respectively, so they don't collide with Collection#get and Collection#set.
+`get` and `set` have been renamed to `getAttribute` and `setAttribute`
+so they don't collide with Collection#get and Collection#set. If your
+target is not a Collection and you'd prefer the shorter names, it's
+easy to alias them yourself.
