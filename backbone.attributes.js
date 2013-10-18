@@ -16,7 +16,7 @@
   }
 }(function (_, Backbone) {
   Backbone.Attributes = _.extend({}, Backbone.Events);
-  var modelMethods = ['get', 'set', 'unset', 'clear', 'has', 'changed', 'hasChanged', 'changedAttributes', 'previous', 'previousAttributes'];
+  var modelMethods = ['get', 'set', 'unset', 'clear', '_validate', 'validate', 'isValid', 'has', 'changed', 'hasChanged', 'changedAttributes', 'previous', 'previousAttributes'];
   var wrappedMethods = ['getAttribute', 'setAttribute', 'clear', 'changedAttributes'];
 
   _.each(modelMethods, function(method) {
@@ -25,8 +25,6 @@
     Backbone.Attributes[method] = _.contains(wrappedMethods, method) ?
        function() { this.attributes || (this.attributes = _.defaults({}, _.result(this, 'defaults'))); return fn.apply(this, arguments) } : fn;
   });
-
-  Backbone.Attributes._validate = function() { return true; }; // hacky, but works
 
   return Backbone.Attributes;
 }));
