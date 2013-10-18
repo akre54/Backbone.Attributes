@@ -1,4 +1,4 @@
-// Backbone.Attributes.js 0.2.1
+// Backbone.Attributes.js 0.3.0
 // ---------------
 
 //     (c) 2013 Adam Krebs
@@ -17,14 +17,16 @@
 }(function (_, Backbone) {
   Backbone.Attributes = _.extend({}, Backbone.Events);
   var modelMethods = ['get', 'set', 'unset', 'clear', '_validate', 'validate', 'isValid', 'has', 'changed', 'hasChanged', 'changedAttributes', 'previous', 'previousAttributes'];
-  var wrappedMethods = ['getAttribute', 'setAttribute', 'clear', 'changedAttributes'];
+  var wrappedMethods = ['get', 'set', 'clear', 'changedAttributes'];
 
   _.each(modelMethods, function(method) {
     var fn = Backbone.Model.prototype[method];
-    method = method === 'get' || method === 'set' ? method + 'Attribute' : method;
     Backbone.Attributes[method] = _.contains(wrappedMethods, method) ?
        function() { this.attributes || (this.attributes = _.defaults({}, _.result(this, 'defaults'))); return fn.apply(this, arguments) } : fn;
   });
+
+  Backbone.Attributes.getAttribute = Backbone.Attributes.get;
+  Backbone.Attributes.setAttribute = Backbone.Attributes.set;
 
   return Backbone.Attributes;
 }));
