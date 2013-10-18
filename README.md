@@ -20,6 +20,6 @@ These methods are borrowed from Backbone.Model, so their functionality is
 exactly the same. You can pass a hash of properties, listen on multiple
 change events, or trigger complex change sequences.
 
-`get` and `set` collide with native `Collection#get` and `Collection#set`. If your
+Note: `get` and `set` collide with native `Collection#get` and `Collection#set`. If your
 target is a Collection, you must use the `getAttribute`/`setAttribute` aliases
 instead.
