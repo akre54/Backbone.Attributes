@@ -8,11 +8,11 @@
 
 (function (factory) {
   if (typeof define === 'function' && define.amd) {
-      define(['underscore', 'backbone'], factory);
+    define(['underscore', 'backbone'], factory);
   } else if (typeof exports === 'object') {
-      factory(require('underscore'), require('backbone'));
+    factory(require('underscore'), require('backbone'));
   } else {
-      factory(_, Backbone);
+    factory(_, Backbone);
   }
 }(function (_, Backbone) {
   Backbone.Attributes = _.extend({}, Backbone.Events);
