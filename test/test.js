@@ -26,7 +26,7 @@ describe('Backbone.Attributes', function() {
     obj.get('name').should.equal('Moe');
     obj.on('change:name', function(ctx, name) {
       name.should.equal('Curly');
-      this.get('name').should.equal(name);
+      this.get('name').should.equal('Curly');
     });
     obj.set('name', 'Curly');
   });
@@ -36,12 +36,8 @@ describe('Backbone.Attributes', function() {
 
     col.get.should.equal(Backbone.Collection.prototype.get);
 
-    col.getAttribute = Backbone.Attributes.get;
-    col.setAttribute = Backbone.Attributes.set;
-
     col.on('change:name', function(ctx, name) {
       ctx.should.equal(col);
-      this.should.equal(col);
       name.should.equal('Curly');
       this.getAttribute('name').should.equal(name);
     });
@@ -52,6 +48,7 @@ describe('Backbone.Attributes', function() {
     var obj = _.defaults({}, Backbone.Attributes);
     obj.set('name', 'Curly');
     obj.get('name').should.equal('Curly');
+    obj.getAttribute.should.equal(obj.get);
     obj.getAttribute('name').should.equal('Curly');
   });
 
