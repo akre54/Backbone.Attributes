@@ -21,7 +21,7 @@ describe('Backbone.Attributes', function() {
         name: 'Moe'
       }
     };
-    obj = _.defaults(obj, Backbone.Attributes);
+    _.defaults(obj, Backbone.Attributes);
 
     obj.get('name').should.equal('Moe');
     obj.on('change:name', function(ctx, name) {
@@ -35,6 +35,9 @@ describe('Backbone.Attributes', function() {
     var col = _.defaults(new Backbone.Collection, Backbone.Attributes);
 
     col.get.should.equal(Backbone.Collection.prototype.get);
+    col.set.should.equal(Backbone.Collection.prototype.set);
+    col.getAttribute.should.equal(Backbone.Attributes.get);
+    col.setAttribute.should.equal(Backbone.Attributes.set);
 
     col.on('change:name', function(ctx, name) {
       ctx.should.equal(col);
@@ -49,6 +52,7 @@ describe('Backbone.Attributes', function() {
     obj.set('name', 'Curly');
     obj.get('name').should.equal('Curly');
     obj.getAttribute.should.equal(obj.get);
+    obj.setAttribute.should.equal(obj.set);
     obj.getAttribute('name').should.equal('Curly');
   });
 
