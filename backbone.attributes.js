@@ -1,19 +1,15 @@
 // Backbone.Attributes.js 0.3.0
 // ---------------
 
-//     (c) 2013 Adam Krebs
+//     (c) 2014 Adam Krebs
 //     Backbone.Attributes may be freely distributed under the MIT license.
 //     For all details and documentation:
 //     https://github.com/akre54/Backbone.Attributes
 
 (function (factory) {
-  if (typeof define === 'function' && define.amd) {
-    define(['underscore', 'backbone'], factory);
-  } else if (typeof exports === 'object') {
-    factory(require('underscore'), require('backbone'));
-  } else {
-    factory(_, Backbone);
-  }
+  if (typeof define === 'function' && define.amd) { define(['underscore', 'backbone'], factory);
+  } else if (typeof exports === 'object') { factory(require('underscore'), require('backbone'));
+  } else { factory(_, Backbone); }
 }(function (_, Backbone) {
   Backbone.Attributes = _.extend({}, Backbone.Events);
   var modelMethods = ['get', 'set', 'unset', 'clear', '_validate', 'validate', 'isValid', 'has', 'changed', 'hasChanged', 'changedAttributes', 'previous', 'previousAttributes'];

@@ -26,7 +26,7 @@ describe('Backbone.Attributes', function() {
     obj.get('name').should.equal('Moe');
     obj.on('change:name', function(ctx, name) {
       name.should.equal('Curly');
-      this.get('name').should.equal('Curly');
+      name.should.equal(this.get('name'));
     });
     obj.set('name', 'Curly');
   });
@@ -36,24 +36,13 @@ describe('Backbone.Attributes', function() {
 
     col.get.should.equal(Backbone.Collection.prototype.get);
     col.set.should.equal(Backbone.Collection.prototype.set);
-    col.getAttribute.should.equal(Backbone.Attributes.get);
-    col.setAttribute.should.equal(Backbone.Attributes.set);
 
     col.on('change:name', function(ctx, name) {
       ctx.should.equal(col);
       name.should.equal('Curly');
-      this.getAttribute('name').should.equal(name);
+      name.should.equal(this.getAttribute('name'));
     });
     col.setAttribute('name', 'Curly');
-  });
-
-  it('should expose both get/getAttribute and set/setAttribute', function() {
-    var obj = _.defaults({}, Backbone.Attributes);
-    obj.set('name', 'Curly');
-    obj.get('name').should.equal('Curly');
-    obj.getAttribute.should.equal(obj.get);
-    obj.setAttribute.should.equal(obj.set);
-    obj.getAttribute('name').should.equal('Curly');
   });
 
   it('should accept a validate method', function() {

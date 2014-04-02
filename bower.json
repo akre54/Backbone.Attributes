@@ -13,7 +13,9 @@
     "change"
   ],
   "dependencies": {
-    "underscore": "*",
+    "underscore": "*"
+  },
+  "peerDependencies": {
     "backbone": "*"
   },
   "license": "MIT"

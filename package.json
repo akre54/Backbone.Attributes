@@ -12,10 +12,12 @@
   "dependencies": {
     "underscore": "*"
   },
+  "peerDependencies": {
+    "backbone": "*"
+  },
   "devDependencies": {
     "mocha": "*",
-    "chai": "*",
-    "backbone": "git://github.com/documentcloud/backbone"
+    "chai": "*"
   },
   "engines": {
     "node": "*",
