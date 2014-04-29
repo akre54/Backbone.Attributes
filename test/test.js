@@ -1,4 +1,4 @@
-require("chai").should();
+var should = require("chai").should();
 global._ = require('underscore');
 global.Backbone = require('backbone');
 require('../backbone.attributes');
@@ -29,6 +29,9 @@ describe('Backbone.Attributes', function() {
       name.should.equal(this.get('name'));
     });
     obj.set('name', 'Curly');
+
+    obj.defaults.title = 'Larry';
+    should.not.exist(obj.get('title'));
   });
 
   it('should not collide with Backbone.Collection methods', function() {
