@@ -13,9 +13,10 @@
     "underscore": "*"
   },
   "peerDependencies": {
-    "backbone": "*"
+    "backbone": ">=1.0.0"
   },
   "devDependencies": {
+    "backbone": ">=1.0.0",
     "mocha": "*",
     "chai": "*"
   },
@@ -27,3 +28,4 @@
     "test": "node_modules/.bin/mocha"
   }
 }
+
