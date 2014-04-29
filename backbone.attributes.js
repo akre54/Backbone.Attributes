@@ -18,7 +18,7 @@
   _.each(modelMethods, function(method) {
     var fn = Backbone.Model.prototype[method];
     Backbone.Attributes[method] = _.contains(wrappedMethods, method) ?
-       function() { this.attributes || (this.attributes = _.clone(_.result(this, 'defaults'))); return fn.apply(this, arguments) } : fn;
+       function() { this.attributes || (this.attributes = _.defaults({}, _.result(this, 'defaults'))); return fn.apply(this, arguments) } : fn;
   });
 
   Backbone.Attributes.getAttribute = Backbone.Attributes.get;
