@@ -1,6 +1,6 @@
 {
   "name": "backbone.attributes",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "homepage": "https://github.com/akre54/backbone.attributes",
   "author": "Adam Krebs <amk528@cs.nyu.edu>",
   "description": "Give any object Backbone getters and setters",
@@ -16,7 +16,7 @@
     "underscore": "*"
   },
   "peerDependencies": {
-    "backbone": "*"
+    "backbone": ">=1.0.0"
   },
   "license": "MIT"
 }

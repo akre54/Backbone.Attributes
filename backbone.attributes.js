@@ -1,4 +1,4 @@
-// Backbone.Attributes.js 0.3.0
+// Backbone.Attributes.js 0.4.0
 // ---------------
 
 //     (c) 2014 Adam Krebs
