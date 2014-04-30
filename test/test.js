@@ -46,6 +46,8 @@ describe('Backbone.Attributes', function() {
       name.should.equal(this.getAttribute('name'));
     });
     col.setAttribute('name', 'Curly');
+    col.setAttributes('name', 'Curly');
+    col.getAttribute('name').should.equal('Curly');
   });
 
   it('should accept a validate method', function() {
@@ -65,3 +67,4 @@ describe('Backbone.Attributes', function() {
     obj.isValid().should.equal(true);
   });
 });
+
