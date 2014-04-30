@@ -15,6 +15,15 @@ describe('Backbone.Attributes', function() {
     obj.set('name', 'Curly');
   });
 
+it('should create attributes per object', function() {
+  var a = _.defaults({}, Backbone.Attributes),
+      b = _.defaults({}, Backbone.Attributes);
+
+  a.set('name', 'Curly');
+  should.not.exist(b.get('name'));
+  a.attributes.should.not.equal(b.attributes);
+});
+
   it('should work with defaults', function() {
     var obj = {
       defaults: {
