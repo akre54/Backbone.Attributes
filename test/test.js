@@ -1,11 +1,11 @@
-var should = require("chai").should();
-global._ = require('underscore');
-global.Backbone = require('backbone');
-require('../backbone.attributes');
+var _ = require('underscore'),
+    Backbone = require('backbone'),
+    should = require("chai").should(),
+    Attributes = require('../backbone.attributes');
 
 describe('Backbone.Attributes', function() {
-  it('should work with plain objects', function() {
-    var obj = _.defaults({}, Backbone.Attributes);
+  it('works with plain objects', function() {
+    var obj = _.defaults({}, Attributes);
 
     obj.on('change:name', function(ctx, name) {
       ctx.should.equal(obj);
@@ -15,22 +15,22 @@ describe('Backbone.Attributes', function() {
     obj.set('name', 'Curly');
   });
 
-it('should create attributes per object', function() {
-  var a = _.defaults({}, Backbone.Attributes),
-      b = _.defaults({}, Backbone.Attributes);
+  it('creates attributes per object', function() {
+    var a = _.defaults({}, Attributes),
+        b = _.defaults({}, Attributes);
 
-  a.set('name', 'Curly');
-  should.not.exist(b.get('name'));
-  a.attributes.should.not.equal(b.attributes);
-});
+    a.set('name', 'Curly');
+    should.not.exist(b.get('name'));
+    a.attributes.should.not.equal(b.attributes);
+  });
 
-  it('should work with defaults', function() {
+  it('works with defaults', function() {
     var obj = {
       defaults: {
         name: 'Moe'
       }
     };
-    _.defaults(obj, Backbone.Attributes);
+    _.defaults(obj, Attributes);
 
     obj.get('name').should.equal('Moe');
     obj.on('change:name', function(ctx, name) {
@@ -43,8 +43,8 @@ it('should create attributes per object', function() {
     should.not.exist(obj.get('title'));
   });
 
-  it('should not collide with Backbone.Collection methods', function() {
-    var col = _.defaults(new Backbone.Collection, Backbone.Attributes);
+  it('does not collide with Backbone.Collection methods', function() {
+    var col = _.defaults(new Backbone.Collection, Attributes);
 
     col.get.should.equal(Backbone.Collection.prototype.get);
     col.set.should.equal(Backbone.Collection.prototype.set);
@@ -59,22 +59,22 @@ it('should create attributes per object', function() {
     col.getAttribute('name').should.equal('Curly');
   });
 
-  it('should update object methods to originals after wrapper called', function() {
-    var obj = _.defaults({}, Backbone.Attributes);
+  it('updates object methods to originals after wrapper called', function() {
+    var obj = _.defaults({}, Attributes);
     obj.get.should.not.equal(Backbone.Model.prototype.get);
-    obj.get.should.equal(Backbone.Attributes.get);
+    obj.get.should.equal(Attributes.get);
     obj.get('foo');
     obj.get.should.equal(Backbone.Model.prototype.get);
   });
 
-  it('should accept a validate method', function() {
+  it('accepts a validate method', function() {
     var obj = {
       validate: function(attrs) {
         if (attrs.name === 'Curly') return "Nope";
       }
     };
 
-    _.defaults(obj, Backbone.Attributes);
+    _.defaults(obj, Attributes);
 
     obj.set({name: 'Curly'});
     obj.isValid().should.equal(false);
