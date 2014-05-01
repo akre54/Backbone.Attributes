@@ -15,10 +15,16 @@
   var modelMethods = ['get', 'set', 'unset', 'clear', '_validate', 'validate', 'isValid', 'has', 'changed', 'hasChanged', 'changedAttributes', 'previous', 'previousAttributes'];
   var wrappedMethods = ['get', 'set', 'clear', 'changedAttributes'];
 
+  var Model = Backbone.Model.prototype;
+
   _.each(modelMethods, function(method) {
-    var fn = Backbone.Model.prototype[method];
-    Attributes[method] = _.contains(wrappedMethods, method) ?
-       function() { this.attributes || (this.attributes = _.defaults({}, _.result(this, 'defaults'))); return fn.apply(this, arguments) } : fn;
+    var fn = Model[method];
+    var wrapper = function() {
+      this.attributes || (this.attributes = _.defaults({}, _.result(this, 'defaults')));
+      _.each(wrappedMethods, function(wrapped) { this[wrapped] = Model[wrapped]; }, this);
+      return fn.apply(this, arguments);
+    };
+    Attributes[method] = _.contains(wrappedMethods, method) ? wrapper : fn;
   });
 
   Attributes.setAttribute = Attributes.setAttributes = Attributes.set;

@@ -59,6 +59,14 @@ it('should create attributes per object', function() {
     col.getAttribute('name').should.equal('Curly');
   });
 
+  it('should update object methods to originals after wrapper called', function() {
+    var obj = _.defaults({}, Backbone.Attributes);
+    obj.get.should.not.equal(Backbone.Model.prototype.get);
+    obj.get.should.equal(Backbone.Attributes.get);
+    obj.get('foo');
+    obj.get.should.equal(Backbone.Model.prototype.get);
+  });
+
   it('should accept a validate method', function() {
     var obj = {
       validate: function(attrs) {
