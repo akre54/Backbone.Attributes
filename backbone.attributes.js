@@ -21,7 +21,7 @@
     var fn = Model[method];
     var wrapper = function() {
       this.attributes = _.defaults({}, this.attributes, _.result(this, 'defaults'));
-      _.each(wrappedMethods, function(wrapped) { this[wrapped] = Model[wrapped]; }, this);
+      _.extend(this, _.pick(Model, wrappedMethods));
       return fn.apply(this, arguments);
     };
     Attributes[method] = _.contains(wrappedMethods, method) ? wrapper : fn;
