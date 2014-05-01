@@ -24,22 +24,27 @@ describe('Backbone.Attributes', function() {
     a.attributes.should.not.equal(b.attributes);
   });
 
-  it('works with defaults', function() {
+  it('respects exiting attributes and defaults', function() {
     var obj = {
-      defaults: {
+      attributes: {
         name: 'Moe'
+      },
+      defaults: {
+        name: 'Shemp',
+        profession: 'entertainer'
       }
     };
     _.defaults(obj, Attributes);
 
     obj.get('name').should.equal('Moe');
+    obj.get('profession').should.equal('entertainer');
     obj.on('change:name', function(ctx, name) {
       name.should.equal('Curly');
       name.should.equal(this.get('name'));
     });
     obj.set('name', 'Curly');
 
-    obj.defaults.title = 'Larry';
+    obj.defaults.title = 'Stooge';
     should.not.exist(obj.get('title'));
   });
 
