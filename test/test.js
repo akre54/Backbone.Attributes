@@ -72,6 +72,16 @@ describe('Backbone.Attributes', function() {
     obj.get.should.equal(Backbone.Model.prototype.get);
   });
 
+  it('does not overwrite existing methods after a wrapped method called', function() {
+    var col = _.defaults(new Backbone.Collection, Attributes);
+    col.get.should.equal(Backbone.Collection.prototype.get);
+    col.clear.should.not.equal(Backbone.Model.prototype.clear);
+    col.clear.should.equal(Attributes.clear);
+    col.clear();
+    col.clear.should.equal(Backbone.Model.prototype.clear);
+    col.get.should.equal(Backbone.Collection.prototype.get);
+  });
+
   it('accepts a validate method', function() {
     var obj = {
       validate: function(attrs) {

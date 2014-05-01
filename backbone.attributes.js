@@ -1,4 +1,4 @@
-// Backbone.Attributes.js 0.5.1
+// Backbone.Attributes.js 0.6.0
 // ---------------
 
 //     (c) 2014 Adam Krebs
@@ -21,7 +21,7 @@
     var fn = Model[method];
     var wrapper = function() {
       this.attributes = _.defaults({}, this.attributes, _.result(this, 'defaults'));
-      _.extend(this, _.pick(Model, wrappedMethods));
+      _.each(wrappedMethods, function(wrapped) { if (this[wrapped] === wrapper) this[wrapped] = Model[wrapped]; }, this);
       return fn.apply(this, arguments);
     };
     Attributes[method] = _.contains(wrappedMethods, method) ? wrapper : fn;
