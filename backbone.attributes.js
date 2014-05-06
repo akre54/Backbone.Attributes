@@ -7,11 +7,11 @@
 //     https://github.com/akre54/Backbone.Attributes
 
 (function (factory) {
-  if (typeof define === 'function' && define.amd) { define(['underscore', 'backbone'], factory);
-  } else if (typeof exports === 'object') { module.exports = factory(require('underscore'), require('backbone'));
-  } else { factory(_, Backbone); }
-}(function (_, Backbone) {
-  var Attributes = _.extend({}, Backbone.Events);
+  if (typeof define === 'function' && define.amd) { define(['underscore', 'backbone', 'exports'], factory);
+  } else if (typeof exports === 'object') { factory(require('underscore'), require('backbone'), exports);
+  } else { factory(_, Backbone, {}); }
+}(function (_, Backbone, Attributes) {
+  _.extend(Backbone.Attributes = Attributes, Backbone.Events);
   var modelMethods = ['get', 'set', 'unset', 'clear', '_validate', 'validate', 'isValid', 'has', 'changed', 'hasChanged', 'changedAttributes', 'previous', 'previousAttributes'];
   var wrappedMethods = ['get', 'set', 'clear', 'changedAttributes'];
 
@@ -29,6 +29,4 @@
 
   Attributes.setAttribute = Attributes.setAttributes = Attributes.set;
   Attributes.getAttribute = Attributes.get;
-
-  return Backbone.Attributes = Attributes;
 }));

@@ -4,6 +4,10 @@ var _ = require('underscore'),
     Attributes = require('../backbone.attributes');
 
 describe('Backbone.Attributes', function() {
+  it('exports as Backbone.Attributes', function() {
+    Attributes.should.equal(Backbone.Attributes);
+  });
+
   it('works with plain objects', function() {
     var obj = _.defaults({}, Attributes);
 
