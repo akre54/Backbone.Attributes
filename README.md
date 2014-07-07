@@ -23,3 +23,37 @@ change events, or trigger complex change sequences.
 Note: `get` and `set` collide with native `Collection#get` and `Collection#set`. If your
 target is a Collection, you must use the `getAttribute`/`setAttribute` aliases
 instead.
+
+```javascript
+var Playlist = Backbone.Collection.extend({
+  defaults: {
+    title: "My Playlist"
+  },
+  initialize: function() {
+    this.setAttribute('currentTrack', 0);
+  },
+  nextTrack: function() {
+    var current = this.getAttribute('currentTrack')
+    this.setAttribute(current + 1);
+  }
+});
+
+_.defaults(Playlist.prototype, Backbone.Attributes);
+
+var PlayerView = Backbone.View.extend({
+  events: {
+    'click #next': 'nextTrack'
+  },
+  initialize: function() {
+    this.listenTo(this.collection, 'change:currentTrack', this.updateTrackDetails);
+  },
+  nextTrack: function() {
+    this.collection.nextTrack();
+  },
+  updateTrackDetails: function() {
+    // Set album art, etc.
+  }
+});
+
+new PlayerView({collection: new Playlist});
+```
