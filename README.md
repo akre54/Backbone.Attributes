@@ -24,16 +24,21 @@ Note: `get` and `set` collide with native `Collection#get` and `Collection#set`.
 target is a Collection, you must use the `getAttribute`/`setAttribute` aliases
 instead.
 
+Example
+-------
+Let's say we're building a music player application that has a list of tracks
+organized into a Playlist collection. When the user clicks on the "next" button,
+we want to update the index of the currently playing track and alert any views
+listening on the Playlist. It might look something like this:
+
 ```javascript
 var Playlist = Backbone.Collection.extend({
   defaults: {
+    currentTrack: 0,
     title: "My Playlist"
   },
-  initialize: function() {
-    this.setAttribute('currentTrack', 0);
-  },
   nextTrack: function() {
-    var current = this.getAttribute('currentTrack')
+    var current = this.getAttribute('currentTrack');
     this.setAttribute(current + 1);
   }
 });
