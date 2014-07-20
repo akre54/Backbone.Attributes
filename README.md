@@ -62,3 +62,17 @@ var PlayerView = Backbone.View.extend({
 
 new PlayerView({collection: new Playlist});
 ```
+
+### Availability of `attributes`
+
+The internal state of an Object that extends from Backbone.Attributes is stored on the
+`attributes` property, just like a Backbone.Model. But there is one key difference you should
+be aware of: whereas a Model's `attributes` is created immediately, the `attributes`
+on an Object that extends `Backbone.Attributes` will not be available until *after* one of the
+borrowed methods is called. This should only be an issue if you are interacting with
+`attributes` property directly.
+
+If you need the `attributes` at an earlier time, then you should create the property within
+`initialize`, or otherwise before it is needed. This might look something like
+`this.attributes = _.clone(this.defaults);`.
+
