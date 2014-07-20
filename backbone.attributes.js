@@ -20,7 +20,7 @@
   _.each(modelMethods, function(method) {
     var fn = Model[method];
     var wrapper = function() {
-      this.attributes = _.defaults({}, this.attributes, _.result(this, 'defaults'));
+      _.defaults(this.attributes || (this.attributes = {}), _.result(this, 'defaults'));
       _.each(wrappedMethods, function(wrapped) { if (this[wrapped] === wrapper) this[wrapped] = Model[wrapped]; }, this);
       return fn.apply(this, arguments);
     };
