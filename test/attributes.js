@@ -64,6 +64,7 @@ describe('Backbone.Attributes', function() {
       name.should.equal(this.getAttribute('name'));
     });
     col.setAttribute('name', 'Curly');
+    col.getAttribute('name').should.equal('Curly');
     col.setAttributes('name', 'Curly');
     col.getAttribute('name').should.equal('Curly');
   });
@@ -84,6 +85,26 @@ describe('Backbone.Attributes', function() {
     col.clear();
     col.clear.should.equal(Backbone.Model.prototype.clear);
     col.get.should.equal(Backbone.Collection.prototype.get);
+  });
+
+  it('should work with prototypes', function() {
+    var Collection = Backbone.Collection.extend();
+    _.defaults(Collection.prototype, Attributes)
+    var col1 = new Collection, col2 = new Collection;
+
+    col1.get.should.equal(Backbone.Collection.prototype.get);
+    col1.clear.should.not.equal(Backbone.Model.prototype.clear);
+    col1.clear.should.equal(Attributes.clear);
+    col1.clear();
+    col1.clear.should.equal(Backbone.Model.prototype.clear);
+    col1.get.should.equal(Backbone.Collection.prototype.get);
+
+    col2.get.should.equal(Backbone.Collection.prototype.get);
+    col2.clear.should.not.equal(Backbone.Model.prototype.clear);
+    col2.clear.should.equal(Attributes.clear);
+    col2.clear();
+    col2.clear.should.equal(Backbone.Model.prototype.clear);
+    col2.get.should.equal(Backbone.Collection.prototype.get);
   });
 
   it('accepts a validate method', function() {
