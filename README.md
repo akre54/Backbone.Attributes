@@ -20,9 +20,15 @@ These methods are borrowed from Backbone.Model, so their functionality is
 exactly the same. You can pass a hash of properties, listen on multiple
 change events, or trigger complex change sequences.
 
-Note: `get` and `set` collide with native `Collection#get` and `Collection#set`. If your
-target is a Collection, you must use the `getAttribute`/`setAttribute` aliases
-instead.
+Note: `get` and `set` collide with native `Collection#get` and `Collection#set`.
+If your target is a Collection, you must use the `getAttribute`/`setAttribute`
+aliases instead.
+
+The target object's `attributes` property is set on the first call to a method
+that relies on its existence (`clear`, `get` or `set`). This is
+mostly to ensure that attributes aren't shared between instances. If you need
+`attributes` earlier, you may create it yourself (e.g. during `initalize`)
+and Backbone.Attributes will respect the existing values.
 
 Example
 -------
@@ -62,13 +68,4 @@ var PlayerView = Backbone.View.extend({
 
 new PlayerView({collection: new Playlist});
 ```
-
-### Notes
-
-The `attributes` property on the extended object is only available once one
-of the methods that relies on `attributes` (`get` or `set`) is called. This is
-mostly to ensure that objects aren't sharing `attributes`. If you need
-`attributes` earlier, you may create it yourself (during `initalize`, e.g.)
-with `this.attributes = {};` and Backbone.Attributes will respect the previous
-values.
 
