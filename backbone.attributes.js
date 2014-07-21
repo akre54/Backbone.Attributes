@@ -21,9 +21,10 @@
     var fn = Model[method];
     var wrapper = function() {
       _.defaults(this.attributes || (this.attributes = {}), _.result(this, 'defaults'));
-      _.each(wrappedMethods, function(wrapped) { if (this[wrapped] === wrapper) this[wrapped] = Model[wrapped]; }, this);
+      _.each(wrappedMethods, function(m) { if (this[m].wrapped) this[m] = Model[m]; }, this);
       return fn.apply(this, arguments);
     };
+    wrapper.wrapped = true;
     Attributes[method] = _.contains(wrappedMethods, method) ? wrapper : fn;
   });
 
