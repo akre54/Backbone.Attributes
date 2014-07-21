@@ -28,7 +28,7 @@ describe('Backbone.Attributes', function() {
     a.attributes.should.not.equal(b.attributes);
   });
 
-  it('respects exiting attributes and defaults', function() {
+  it('respects existing attributes and defaults', function() {
     var obj = {
       attributes: {
         name: 'Moe'
