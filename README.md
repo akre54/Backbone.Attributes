@@ -43,9 +43,16 @@ var Playlist = Backbone.Collection.extend({
     currentTrack: 0,
     title: "My Playlist"
   },
+  changeTrack: function(current, next) {
+    this.stopListening(this.at(current), 'track:done');
+    this.listenTo(this.at(next), 'track:done', this.nextTrack);
+
+    this.setAttribute('currentTrack', next);
+  },
   nextTrack: function() {
-    var current = this.getAttribute('currentTrack');
-    this.setAttribute(current + 1);
+    var current = this.getAttribute('currentTrack'),
+        next = current + 1;
+    this.changeTrack(current, next);
   }
 });
 
