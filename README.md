@@ -43,16 +43,20 @@ var Playlist = Backbone.Collection.extend({
     currentTrack: 0,
     title: "My Playlist"
   },
-  changeTrack: function(current, next) {
-    this.stopListening(this.at(current), 'track:done');
-    this.listenTo(this.at(next), 'track:done', this.nextTrack);
+  initialize: function() {
+    this.on('change:currentTrack', function() {
+      var oldTrack = this.at(this.previous('currentTrack')),
+          newTrack = this.at(this.getAttribute('currentTrack'));
 
-    this.setAttribute('currentTrack', next);
+      this.stopListening(oldTrack, 'track:done');
+      this.listenTo(newTrack, 'track:done', this.nextTrack);
+    });
+  },
+  setTrack: function(trackPosition) {
+    this.setAttribute('currentTrack', trackPosition);
   },
   nextTrack: function() {
-    var current = this.getAttribute('currentTrack'),
-        next = current + 1;
-    this.changeTrack(current, next);
+    this.setTrack(this.getAttribute('currentTrack') + 1);
   }
 });
 
@@ -60,13 +64,13 @@ _.defaults(Playlist.prototype, Backbone.Attributes);
 
 var PlayerView = Backbone.View.extend({
   events: {
-    'click #next': 'nextTrack'
+    'click .track': 'setTrack'
   },
   initialize: function() {
     this.listenTo(this.collection, 'change:currentTrack', this.updateTrackDetails);
   },
-  nextTrack: function() {
-    this.collection.nextTrack();
+  setTrack: function(e) {
+    this.collection.setTrack($(e.target).index());
   },
   updateTrackDetails: function() {
     // Set album art, etc.
