@@ -1,6 +1,6 @@
 {
   "name": "backbone.attributes",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "homepage": "https://github.com/akre54/backbone.attributes",
   "author": "Adam Krebs <amk528@cs.nyu.edu>",
   "description": "Give any object Backbone getters and setters",

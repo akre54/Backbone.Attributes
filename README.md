@@ -1,7 +1,7 @@
 Backbone.Attributes
 ===================
 
-Backbone.Attributes is a tiny (390 bytes minified/gz) plugin to give any object
+Backbone.Attributes is a tiny (~400 bytes minified/gz) plugin to give any object
 Backbone.Model getter/setter methods. Sometimes models are too heavyweight or
 you don't need the full sync / collection methods Backbone Models provide.
 
