@@ -85,6 +85,7 @@ describe('Backbone.Attributes', function() {
     col.getAttribute();
     col.clear.should.equal(Backbone.Model.prototype.clear);
     col.get.should.equal(Backbone.Collection.prototype.get);
+    col.getAttribute.should.equal(Backbone.Model.prototype.get);
   });
 
   it('accepts a validate method', function() {

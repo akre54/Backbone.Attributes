@@ -22,6 +22,8 @@
     var wrapper = function() {
       _.defaults(this.attributes || (this.attributes = {}), _.result(this, 'defaults'));
       _.each(wrappedMethods, function(m) { if (this[m].wrapped) this[m] = Model[m]; }, this);
+      this.setAttribute = this.setAttributes = Model.set;
+      this.getAttribute = Model.get;
       return fn.apply(this, arguments);
     };
     wrapper.wrapped = true;
